@@ -1,22 +1,25 @@
 <div class="uk-inline uk-width-large" id="chat-sample-container">
     <div class="uk-card uk-card-default uk-card-small">
         <div class="uk-card-header uk-background-muted">
-            <div class="uk-card-title">Chat Sample Room</div>
+            <div class="uk-card-title chat-title">Chat Sample Room</div>
         </div>
         <div class="message-body uk-card-body" uk-margin>
-            {% for message in messages %}
-                <article class="uk-comment uk-padding-small uk-position-relative" data-name="{{ message['name'] }}">
+            {% for time, message in messages %}
+                <article class="uk-comment uk-padding-small uk-position-relative" data-time="{{ time }}" data-name="{{ message['name'] }}">
                     <header class="uk-comment-header uk-margin-remove">
                         <h5 class="uk-comment-title">{{ message['name'] }}</h5>
                     </header>
                     <div class="uk-comment-body">
-                        <p>{{ message['message'] }}</p>
+                        <p class="text">{{ message['message'] }}</p>
                     </div>
                     <a class="uk-position-small uk-position-top-right remove" uk-icon="icon: close"></a>
                 </article>
             {% endfor %}
         </div>
         <div class="uk-card-footer uk-background-muted" uk-margin>
+            <div>
+                <div class="uk-text-meta uk-text-italic typing uk-hidden"><span class="name"></span> is typing <span class="dots">...</span></div>
+            </div>
             <div>
                 <textarea class="uk-textarea input-emoji message uk-width-1-1" cols="15" rows="2" placeholder="Enter your message..."></textarea>
             </div>

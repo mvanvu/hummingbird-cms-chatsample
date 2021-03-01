@@ -11,6 +11,20 @@ class ChatSampleController extends ControllerBase
 {
 	public function indexAction()
 	{
+		Assets::inlineCss(<<<CSS
+@keyframes dotsWidth {
+	from {width: 1px}
+	to {width: 20px}
+}
+span.dots {
+	display: inline-block;
+	transition: .8s all ease;
+	animation: dotsWidth 1s infinite;
+	overflow: hidden;
+	vertical-align: bottom;
+}
+CSS
+		);
 		Assets::add('js/emoji.js');
 		Plugin::addPublicAssets('js/chat.js', 'Socket', 'ChatSample');
 		$this->view
@@ -22,7 +36,10 @@ class ChatSampleController extends ControllerBase
 	{
 		$data = $this->request->getPost('message');
 
-		if (!empty($data['name']) && !empty($data['message']))
+		if (!empty($data['name'])
+			&& !empty($data['message'])
+			&& !empty($data['time'])
+		)
 		{
 			$socketModel = SocketData::getInstance(['context' => 'ChatSample']);
 			$messages    = [];
@@ -40,7 +57,7 @@ class ChatSampleController extends ControllerBase
 				);
 			}
 
-			$messages[] = ['name' => $data['name'], 'message' => $data['message']];
+			$messages[$data['time']] = ['name' => $data['name'], 'message' => $data['message']];
 			$socketModel->assign(
 				[
 					'context' => 'ChatSample',
@@ -52,13 +69,13 @@ class ChatSampleController extends ControllerBase
 		return $this->response->setJsonContent('Message saved.');
 	}
 
-	public function deleteAction($index)
+	public function deleteAction($time)
 	{
 		if ($socketModel = SocketData::getInstance(['context' => 'ChatSample']))
 		{
 			$messages = json_decode($socketModel->message ?? '{}', true) ?: [];
-			unset($messages[$index]);
-			$socketModel->assign(['message' => json_encode(array_values($messages))])->save();
+			unset($messages[$time]);
+			$socketModel->assign(['message' => json_encode($messages)])->save();
 		}
 
 		return $this->response->setJsonContent('Message removed.');
