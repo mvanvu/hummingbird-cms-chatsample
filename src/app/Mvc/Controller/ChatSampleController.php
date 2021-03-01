@@ -26,7 +26,7 @@ span.dots {
 CSS
 		);
 		Assets::add('js/emoji.js');
-		Plugin::addPublicAssets('js/chat.js', 'Socket', 'ChatSample');
+		Assets::addFromPlugin('js/chat.js', 'Socket', 'ChatSample');
 		$this->view
 			->setVar('messages', json_decode(SocketData::getInstance(['context' => 'ChatSample'])->message ?? '{}', true) ?: [])
 			->pick('chat-sample');
