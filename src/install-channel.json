@@ -1,0 +1,16 @@
+{
+  "name": "Backup",
+  "group": "Cms",
+  "author": "Mai Vu",
+  "authorUrl": "https://github.com/mvanvu",
+  "title": {
+    "en-GB": "Chat sample (Official)",
+    "vi-VN": "Hộp chat đơn giản (Chính hãng)"
+  },
+  "description": {
+    "en-GB": "A sample Socket plugin (for dev purpose)",
+    "vi-VN": "Một chat box đơn giản cho mục đích tìm hiểu phát triển ứng dụng realtime bằng Socket"
+  },
+  "version": "1.0",
+  "source": "https://github.com/mvanvu/hummingbird-cms-chatsample/archive/master.zip"
+}
