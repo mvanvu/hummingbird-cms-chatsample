@@ -14,4 +14,21 @@ This plugin is ready to use inside the docker
 ## Note
 After install the plugin you must restart the docker to reload the Socket application
 
+Change path/to/repo/hummingbird-cms to your hummingbird-cms repo
 
+```shell script
+cd path/to/repo/hummingbird-cms
+```
+
+#### Restart docker
+```shell script
+docker-compose down
+docker-compose up -d
+```
+
+#### Alternatively
+```shell script
+docker-compose exec ubuntu-18.4 bash
+supervisorctl stop hummingbird-socket
+supervisorctl start hummingbird-socket
+```
