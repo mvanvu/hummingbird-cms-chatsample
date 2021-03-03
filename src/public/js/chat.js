@@ -6,8 +6,8 @@ _$.ready(function ($) {
         updateName = function (name) {
             if (name.length < 1) {
                 UIkit.notification('Please enter your valid name!', {status: 'warning'});
-            } else if (name.length < 4) {
-                UIkit.notification('The minimum characters must be 4!', {status: 'warning'});
+            } else if (name.length < 2) {
+                UIkit.notification('The minimum characters must be 2!', {status: 'warning'});
             } else {
                 $.storage.set('ChatSampleClientName', name);
                 chat.find('.form').hide();
