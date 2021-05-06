@@ -29,7 +29,7 @@ CSS
 		Assets::addFromPlugin('js/chat.js', 'Socket', 'ChatSample');
 		$this->view
 			->setVar('messages', json_decode(SocketData::getInstance(['context' => 'ChatSample'])->message ?? '{}', true) ?: [])
-			->pick('chat-sample');
+			->pick('ChatSample/Index');
 	}
 
 	public function saveAction()
